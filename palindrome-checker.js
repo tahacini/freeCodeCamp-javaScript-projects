@@ -5,6 +5,14 @@ function palindrome(str) {
   let reversedWord = word.slice().reverse();
   console.log(word);
   console.log(reversedWord);
+  // Compare every letter, return false if there is a difference
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] !== reversedWord[i]) {
+      return false;
+    }
+  }
+  // Otherwise true
+  return true;
 }
 
 console.log(palindrome("eye"));
