@@ -30,6 +30,14 @@ function rot13(str) {
     Y: "L",
     Z: "M",
   };
+  for (let i = 0; i < word.length; i++) {
+    // Replace the letter with its equivalent in the object.
+    if (word[i] in rot13) {
+      word[i] = rot13[word[i]];
+    }
+  }
+  // Join the letters and return it.
+  return word.join("");
 }
 
 rot13("SERR PBQR PNZC");
