@@ -21,6 +21,29 @@ function checkCashRegister(price, cash, cid) {
     ["NICKEL", 0],
     ["PENNY", 0],
   ];
+
+  for (let i = 0; i < converted.length; i++) {
+    // While Loop will search till find a 'converted' value smaller than the 'myChange'
+    // and if only I have enough money from that unit in the cash drawer.
+    while (myChange >= converted[i] && myCash[i] > 0) {
+      // Subtract the found value from myChange because I gave change.
+      myChange -= converted[i];
+      // Record the units I gave.
+      result[i][1] += converted[i];
+      // Subtract the units from my drawer.
+      myCash[i] -= converted[i];
+    }
+  }
+
+  // Filter the empty Currency Units.
+  // Divide by 100 so it return to its original form and push remaining to "changes.change".
+  result
+    .filter((el) => el[1] !== 0)
+    .map((el) => [el[0], el[1] / 100])
+    .forEach((el) => changes.change.push(el));
+
+  // To check final status collect total cash
+  const myFinalCash = myCash.reduce((sum, val) => sum + val, 0);
 }
 
 checkCashRegister(19.5, 20, [
