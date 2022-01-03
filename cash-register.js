@@ -44,6 +44,22 @@ function checkCashRegister(price, cash, cid) {
 
   // To check final status collect total cash
   const myFinalCash = myCash.reduce((sum, val) => sum + val, 0);
+
+  // If I don't have enough cash to give then set status to "INSUFFICIENT_FUNDS".
+  // Else IF my cash in the drawer is 0 then set status to "CLOSED".
+  if (myChange > 0) {
+    changes.status = "INSUFFICIENT_FUNDS";
+    changes.change = [];
+  } else if (myFinalCash === 0) {
+    changes.status = "CLOSED";
+    changes.change = [];
+    result
+      .map((el) => [el[0], el[1] / 100])
+      .forEach((el) => changes.change.unshift(el));
+  }
+
+  // Finally return changes.
+  return changes;
 }
 
 checkCashRegister(19.5, 20, [
